@@ -1,6 +1,6 @@
 # HelloWorld
 
-A React landing page that says Hello World. Nothing else.
+A React landing page that says Hello Code. Nothing else.
 
 ## Running it
 
