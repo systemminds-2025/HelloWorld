@@ -1,10 +1,6 @@
-# React UI Demo
+# HelloWorld
 
-A small React interface with no back end, used to exercise the PM tool's
-browser gate end to end: sign in, read some numbers, add and complete a task.
-
-The sign-in accepts any non-empty username and password — there is no server to
-check them against, and the point is the flow rather than the authentication.
+A React landing page that says Hello World. Nothing else.
 
 ## Running it
 
