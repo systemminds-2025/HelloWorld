@@ -12,3 +12,6 @@ blob-report
 
 # If the artefact dir is ever pointed inside the checkout.
 .test-runs
+
+# Recordings copied in so the running app can serve them.
+public/__test-runs
