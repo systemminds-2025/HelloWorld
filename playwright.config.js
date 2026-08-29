@@ -11,6 +11,19 @@ import { defineConfig, devices } from '@playwright/test'
 const PORT = process.env.PORT || 5173
 const BASE = `http://127.0.0.1:${PORT}/react-ui-demo/`
 
+/**
+ * Where the recordings go.
+ *
+ * Keyed by ticket, so runs of different tickets do not overwrite each other and
+ * a video can be traced back to the change it was recording. TASK_ID is set by
+ * the agent VM; a local run without one lands in `local` rather than failing.
+ *
+ * The path sits beside the checkout rather than inside it — a video written
+ * into the working tree shows up as an untracked file in the ticket's diff.
+ */
+const TASK_ID = process.env.TASK_ID || 'local'
+const ARTEFACTS = process.env.PW_ARTEFACT_DIR || `../.test-runs/${TASK_ID}`
+
 export default defineConfig({
   testDir: './tests',
 
@@ -24,10 +37,20 @@ export default defineConfig({
 
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
 
+  // Everything a run produces — videos, traces, screenshots — under one
+  // ticket-scoped folder, so collecting them afterwards is one directory read.
+  outputDir: ARTEFACTS,
+
   use: {
     baseURL: BASE,
-    // Kept only for failures. Recording every run fills the disk with videos
-    // of tests that passed.
+
+    // Recorded every run, not only on failure: the point of the recording is
+    // to show a person what the change looks like working, which is exactly
+    // the run that passed.
+    video: { mode: 'on', size: { width: 1280, height: 720 } },
+
+    // These two stay failure-only. A trace is large and only read when
+    // something broke, and the video already shows what the screenshot would.
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },

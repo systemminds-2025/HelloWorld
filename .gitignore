@@ -9,3 +9,6 @@ test-results
 playwright-report
 blob-report
 .playwright-mcp
+
+# If the artefact dir is ever pointed inside the checkout.
+.test-runs
