@@ -18,6 +18,11 @@ test('the greeting is the page heading, not just text on it', async ({ page }) =
   await expect(page.getByRole('heading', { name: 'Hello World', level: 1 })).toBeVisible()
 })
 
+test('the subtitle welcomes the user back', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByTestId('subtitle')).toHaveText('Welcome Back')
+})
+
 test('nothing errors in the console', async ({ page }) => {
   const errors = []
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()) })

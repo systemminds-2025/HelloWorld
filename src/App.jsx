@@ -9,6 +9,7 @@ export default function App() {
   return (
     <main className="centre">
       <h1 data-testid="greeting">Hello World</h1>
+      <p data-testid="subtitle">Welcome Back</p>
     </main>
   )
 }
