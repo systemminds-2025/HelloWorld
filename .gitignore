@@ -2,3 +2,10 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Playwright and the MCP write into the checkout. None of it is a change
+# anyone made, and it buries the files that are.
+test-results
+playwright-report
+blob-report
+.playwright-mcp
