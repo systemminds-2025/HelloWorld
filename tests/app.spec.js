@@ -18,6 +18,24 @@ test('the greeting is the page heading, not just text on it', async ({ page }) =
   await expect(page.getByRole('heading', { name: 'Hello World', level: 1 })).toBeVisible()
 })
 
+test('the navigation has Home, About and Contact Us, and they switch the page', async ({ page }) => {
+  await page.goto('/')
+
+  const nav = page.getByTestId('nav')
+  await expect(nav.getByTestId('nav-home')).toHaveText('Home')
+  await expect(nav.getByTestId('nav-about')).toHaveText('About')
+  await expect(nav.getByTestId('nav-contact')).toHaveText('Contact Us')
+
+  await nav.getByTestId('nav-about').click()
+  await expect(page.getByTestId('greeting')).toHaveText('About')
+
+  await nav.getByTestId('nav-contact').click()
+  await expect(page.getByTestId('greeting')).toHaveText('Contact Us')
+
+  await nav.getByTestId('nav-home').click()
+  await expect(page.getByTestId('greeting')).toHaveText('Hello World')
+})
+
 test('nothing errors in the console', async ({ page }) => {
   const errors = []
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()) })
