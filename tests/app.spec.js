@@ -36,6 +36,11 @@ test('the navigation has Home, About and Contact Us, and they switch the page', 
   await expect(page.getByTestId('greeting')).toHaveText('Hello World')
 })
 
+test('the page background is orange', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(249, 115, 22)')
+})
+
 test('nothing errors in the console', async ({ page }) => {
   const errors = []
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()) })
