@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 /**
  * The three sections the nav links switch between. Kept as plain text here
- * rather than routes: there is no router in this project, and the ticket only
+ * rather than routes: there is no router in this project,scdv dc and the ticket only
  * asks for the navigation itself.
  */
 const PAGES = {
